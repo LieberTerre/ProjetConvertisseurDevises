@@ -1,51 +1,39 @@
-let tableauChange = null;
-
-const apiUrl = 'http://data.fixer.io/api/latest?access_key=308a94edf6a162386b9e93e05271eac5';
-
-loadJson(apiUrl).then(data => {
-    tableauChange = data.rates
-
-
-
-
-    // TODO appeler la fonction de traitement de Michi ici?
-    // mais il faut la refact
-    // regardez ce que rend le console.log(suivant)
-    console.log(tableauChange)
-
-
-
-});
-
-
-
-function conv(money,input,output){
-let taux=1;
-const yen=2;
-const dollar=1;
-const euro=0;
-
-if(input===yen&&output===euro){
-  taux=0.008;
+/**
+ ****Change Here 
+ ** function pour montre le resultat
+ * @param  {} result 
+ * @param  {} symbol
+ */
+function showAnswer(result , symbol) {
+  
+  console.log(result + " " + symbol);
 }
-if(input===yen&&output===dollar){
-  taux=0.0095;
-}
-if(input===euro&&output===dollar){
-  taux=1.1826;
-}
-if(input===euro&&output===yen){
-  taux=125.0953;
-}
-if(input===dollar&&output===euro){
-  taux=0.8456;
-}
-if(input===dollar&&output===yen){
-  taux=105.78;
+/**
+ *  How to use :   conv(300, 'USD', 'JPY')
+ * @param  {} amount 
+ * @param  {} base
+ * @param  {} symbol
+ */
+function conv(amount, base, symbol) {
+  const apiUrl = 'https://api.exchangeratesapi.io/latest?symbols=' + symbol + '&base=' + base;
+  
+  let rate;
+  loadRemoteJson(apiUrl).then(data => {
+    //console.log("loadJson", data.rates[symbol]);
+    rate = data.rates[symbol];
+    showAnswer(Math.floor(amount * rate), symbol);
+  })
 }
 
-
-return money*taux;
+/**
+ * ne touche pas pour get API
+ * @param  {} apiUrl
+ */
+function loadRemoteJson(apiUrl) {
+  // How to use
+  // loadRemoteJson(apiUrl).then(data => {
+  // }) 
+  return fetch(apiUrl).then(function (data) {
+    return data.json();
+  })
 }
-
-
