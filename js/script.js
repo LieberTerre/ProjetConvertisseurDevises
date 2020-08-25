@@ -57,6 +57,15 @@ const selectorEnd = document.querySelector('#endCurrency')
 //     e.prevent.preventDefault()
 // })
 
+input.addEventListener('keypress', (e) => {
+    const input = document.querySelector('#ammount')
+    console.log(input.value)
+    const enterValue = getSelectorEnter()
+    console.log(enterValue)
+    const EndValue = getSelectorEnd()
+    console.log(EndValue)
+    conv(input.value, enterValue, EndValue)
+})
 input.addEventListener('change', (e) => {
     const input = document.querySelector('#ammount')
     console.log(input.value)
