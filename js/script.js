@@ -21,7 +21,7 @@ function conv(amount, base, symbol) {
   loadRemoteJson(apiUrl).then(data => {
     //console.log("loadJson", data.rates[symbol]);
     rate = data.rates[symbol];
-    showAnswer(Math.floor(amount * rate), symbol);
+    showAnswer(Math.floor((amount * rate)*100)/100, symbol);
   })
 }
 
