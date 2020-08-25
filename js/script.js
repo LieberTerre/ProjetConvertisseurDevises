@@ -19,7 +19,7 @@ function conv(amount, base, symbol) {
 
     let rate;
 
-    if (base === symbol) {
+    if (base != symbol) {
         loadRemoteJson(apiUrl).then(data => {
             //console.log("loadJson", data.rates[symbol]);
             rate = data.rates[symbol];
